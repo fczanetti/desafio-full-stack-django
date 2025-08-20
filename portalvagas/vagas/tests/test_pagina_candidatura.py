@@ -15,8 +15,8 @@ def test_pagina_deve_ser_acessivel(client):
 
 @pytest.mark.django_db
 def test_pagina_de_candidatura_deve_exibir_vagas_abertas(client):
-    vaga = baker.make(Vaga, status='aberta')
-    vaga_2 = baker.make(Vaga, status='aberta')
+    vaga = baker.make(Vaga, status=Vaga.ABERTA)
+    vaga_2 = baker.make(Vaga, status=Vaga.ABERTA)
     response = client.get(reverse('vagas:candidatar'))
 
     assert vaga.titulo in response.content.decode()
@@ -27,8 +27,8 @@ def test_pagina_de_candidatura_deve_exibir_vagas_abertas(client):
 
 @pytest.mark.django_db
 def test_pagina_de_candidatura_deve_exibir_apenas_vagas_abertas(client):
-    vaga = baker.make(Vaga, status='aberta')
-    vaga_fechada = baker.make(Vaga, status='fechada')
+    vaga = baker.make(Vaga, status=Vaga.ABERTA)
+    vaga_fechada = baker.make(Vaga, status=Vaga.FECHADA)
     response = client.get(reverse('vagas:candidatar'))
 
     assert vaga.titulo in response.content.decode()
@@ -50,7 +50,7 @@ def test_deve_registrar_candidatura(client):
         'email': 'candidato@teste.com',
         'data_nascimento': '2000-01-01',
         'experiencia': 'Experiência Teste',
-        'vaga': vaga.id
+        'vagas': vaga.id
     })
 
     assert response.status_code == 302
@@ -75,13 +75,12 @@ def test_nao_deve_registrar_candidatura_de_usuario_para_mesma_vaga_duas_vezes(cl
 
     assert Candidatura.objects.count() == 1
 
-    response = client.post(reverse('vagas:candidatar'), data={
+    client.post(reverse('vagas:candidatar'), data={
         'nome': 'Candidato Teste',
         'email': 'candidato@teste.com',
         'data_nascimento': '2000-01-01',
         'experiencia': 'Experiência Teste',
-        'vaga': vaga.id
+        'vagas': vaga.id
     })
 
     assert Candidatura.objects.count() == 1
-    assert "Candidato com este Email já existe" in response.content.decode()

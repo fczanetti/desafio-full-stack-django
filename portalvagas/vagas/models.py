@@ -21,7 +21,7 @@ class Vaga(models.Model):
     candidatos = models.ManyToManyField(Candidato, through='Candidatura', related_name='vagas')
 
     def __str__(self):
-        return self.titulo
+        return f"{self.titulo} - {self.setor}"
 
 
 class Candidatura(models.Model):

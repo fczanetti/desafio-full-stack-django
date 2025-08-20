@@ -36,12 +36,11 @@
             <span class="ttptext">{{ form.experiencia.errors }}</span>
         </div>
 
-        <label class="mt-4 form-label">Escolha uma vaga</label>
-        <select name="vaga" class="form-select">
-            {% for vaga in vagas %}
-                <option value="{{ vaga.id }}">{{ vaga.titulo }} - {{ vaga.setor }}</option>
-            {% endfor %}
-        </select>
+        <div class="form-group d-flex flex-column mt-3">
+            <label for="id_vagas" class="form-label">Escolha uma vaga</label>
+            {{ form.vagas }}
+            <span class="ttptext">{{ form.vagas.errors }}</span>
+        </div>
 
         <button type="submit" class="mt-5 btn btn-primary">Candidatar</button>
 
@@ -50,7 +49,7 @@
     {% if messages %}
         <div class="container mt-3">
             {% for message in messages %}
-            <div class="text-success">
+            <div class="{% if message.tags == 'success' %}text-success{% elif message.tags == 'warning' %}text-danger{% endif %}">
                 {{ message }}
             </div>
             {% endfor %}

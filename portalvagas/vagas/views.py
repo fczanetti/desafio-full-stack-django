@@ -2,25 +2,23 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
 
-from portalvagas.vagas.forms import CandidatoForm
-from portalvagas.vagas.models import Vaga
+from portalvagas.vagas.forms import CandidaturaForm
+from portalvagas.vagas.facade import criar_candidatura
 
 
 def candidatar(request):
-    form = CandidatoForm()
-    vagas = Vaga.objects.filter(status='aberta')
+    form = CandidaturaForm()
     if request.method == "POST":
+        form = CandidaturaForm(request.POST)
 
-        vaga_id = request.POST.get("vaga")
-        vaga = Vaga.objects.get(id=vaga_id)
-
-        form = CandidatoForm(request.POST)
         if form.is_valid():
-            candidato = form.save()
-            candidato.vagas.add(vaga)
-            messages.success(request, "Candidatura registrada com sucesso!")
+            candidatura_criada = criar_candidatura(request)
+
+            if candidatura_criada:
+                messages.success(request, "Candidatura registrada com sucesso!")
+            else:
+                messages.warning(request, "Você já se candidatou a esta vaga.")
 
             return redirect("vagas:candidatar")
 
-    context = {"form": form, "vagas": vagas}
-    return render(request, "vagas/candidatar.html", context)
+    return render(request, "vagas/candidatar.html", {"form": form})
