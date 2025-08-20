@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portalvagas.vagas.urls')),
+    path('dashboard/', include('portalvagas.dashboard.urls')),
 ]
