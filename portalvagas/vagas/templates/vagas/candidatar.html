@@ -1,10 +1,12 @@
 {% extends "base/base.html" %}
 
+{% block page_title %}<title>Vagas</title>{% endblock page_title %}
+
 {% block content %}
 
     <form action="" method="POST" class="container mt-5 d-flex flex-column" style="width: 600px;">
         {% csrf_token %}
-        <h4 class="mb-4">Candidate-se a uma Vaga</h4>
+        <h4 class="mb-4">Candidate-se a uma vaga</h4>
         
         <div class="form-group d-flex flex-column">
             <label for="id_nome" class="form-label">{{ form.nome.label }}</label>
