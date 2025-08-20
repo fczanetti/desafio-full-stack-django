@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'portalvagas.base',
     'portalvagas.vagas',
     'portalvagas.candidatos',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

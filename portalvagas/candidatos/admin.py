@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from portalvagas.candidatos.models import Candidato
+
+
+@admin.register(Candidato)
+class CandidatoAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'email', 'data_nascimento')
+    search_fields = ('nome', 'email')
