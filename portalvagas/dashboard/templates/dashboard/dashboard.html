@@ -1,5 +1,66 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {% block page_title %}<title>Dashboard</title>{% endblock page_title %}
 
-{% block content %}{% endblock content %}
+{% block content %}
+
+    <div class="container">
+        <h1 class="mb-4 mt-4">📊 Dashboard de Vagas</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4 p-3">
+                <h5>Total de Vagas Abertas/Fechadas</h5>
+                <canvas id="chartVagas" style="max-width:100%; max-height:300px;"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4 p-3">
+                <h5>Número de Candidatos por Vaga</h5>
+                <canvas id="chartCandidatos" style="max-width:100%; max-height:300px;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4 p-3">
+            <h5>Média de Idade dos Candidatos</h5>
+            <p><strong>{{ idade_media }}</strong> anos</p>
+
+            <h5>Setor com Mais Vagas Abertas</h5>
+            <p><strong>{{ setor_top|default:"Nenhum" }}</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Dados do Django -> JS
+        const vagasStatus = {{ vagas_status|safe }};
+        const candidatosDict = {{ candidatos_dict|safe }};
+
+        // Gráfico 1: Vagas Abertas x Fechadas
+        new Chart(document.getElementById('chartVagas'), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(vagasStatus),
+                datasets: [{
+                    data: Object.values(vagasStatus),
+                    backgroundColor: ['#36A2EB', '#FF6384'],
+                }]
+            }
+        });
+
+        // Gráfico 2: Candidatos por Vaga
+        new Chart(document.getElementById('chartCandidatos'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(candidatosDict),
+                datasets: [{
+                    label: 'Candidatos',
+                    data: Object.values(candidatosDict),
+                    backgroundColor: '#4CAF50',
+                }]
+            }
+        });
+    </script>
+
+{% endblock content %}
