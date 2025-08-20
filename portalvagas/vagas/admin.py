@@ -17,5 +17,5 @@ class VagaAdmin(admin.ModelAdmin):
 
 @admin.register(Candidatura)
 class CandidaturaAdmin(admin.ModelAdmin):
-    list_display = ('candidato', 'vaga', 'data', 'status_candidatura')
-    search_fields = ('candidato__nome', 'vaga__titulo')
+    list_display = ('candidato', 'candidato__nome', 'vaga', 'data', 'status_candidatura')
+    search_fields = ('candidato__nome', 'candidato__email', 'vaga__titulo')
