@@ -1,14 +1,6 @@
-# desafio-full-stack-django
-Desafio Django
-
-- [ ] Adicionar instruções para rodar testes e projeto no readme;
-- [ ] Adicionar ci/cd;
-- [x] Adicionar navbar ou opção para o usuário ir para o dashboard;
-- [x] Adicionar dashboard;
-
 # Introdução
 
-Este projeto escrito em `Python` e `Django` consiste em um formulário onde candidatos podem se inscrever em vagas abertas, e em um dashboard que apresenta as estatísticas de candidatos inscritos e vagas disponíveis.
+Este projeto escrito em `Python` e `Django` consiste em um formulário onde candidatos podem se inscrever em vagas abertas e em um dashboard que apresenta as estatísticas de candidatos inscritos e vagas disponíveis. Para que as instruções abaixo funcionem, estas devem ser executadas em um ambiente linux.
 
 # Como executar os testes
 
@@ -42,3 +34,22 @@ cp contrib/env-sample .env
 ```
 pytest
 ```
+
+# Como executar o projeto
+
+- Use o comando abaixo para aplicar as migrações no banco de dados:
+```
+python manage.py migrate
+```
+
+- após aplicar as migrações, crie um superusuário do Django:
+```
+python manage.py createsuperuser
+```
+
+- com o superusuário criado, execute o servidor local do Django:
+```
+python manage.py runserver
+```
+
+Neste momento, tanto o formulário quanto o dashboard já estarão acessíveis no endereço `http://127.0.0.1:8000`. Para poder interagir criando algumas vagas, acesse o painel de administração e use as credenciais fornecidas no momento de criar o superusuário para fazer login. Endereço: `http://127.0.0.1:8000/admin`.
