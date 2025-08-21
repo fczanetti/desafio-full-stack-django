@@ -1,10 +1,10 @@
 # Introdução
 
-Este projeto escrito em `Python` e `Django` consiste em um formulário onde candidatos podem se inscrever em vagas abertas e em um dashboard que apresenta as estatísticas de candidatos inscritos e vagas disponíveis. Para que as instruções abaixo funcionem, estas devem ser executadas em um ambiente linux.
+Este projeto escrito em `Python` e `Django` consiste em um formulário onde candidatos podem se inscrever em vagas abertas e em um dashboard que apresenta as estatísticas de candidatos inscritos e vagas disponíveis. Para que as instruções abaixo funcionem, estas devem ser executadas em um ambiente Linux.
 
 # Como executar os testes
 
-- clone este repositório através do seguinte comando: 
+- Clone este repositório através do seguinte comando: 
 ```
 git clone git@github.com:fczanetti/desafio-full-stack-django.git
 ```
