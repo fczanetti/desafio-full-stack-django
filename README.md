@@ -37,6 +37,8 @@ pytest
 
 # Como executar o projeto
 
+Para executar o projeto, é necessário seguir todos os passos do tópico anterior (Como executar os testes). Uma vez que isso foi feito, basta seguir os próximos passos.
+
 - Use o comando abaixo para aplicar as migrações no banco de dados:
 ```
 python manage.py migrate
